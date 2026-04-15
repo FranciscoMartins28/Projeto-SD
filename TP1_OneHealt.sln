@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35818.85 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servidor", "Servidor\Servidor.csproj", "{D716540C-0F5D-4F33-A57D-A9FD5E1D512B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gateway", "Gateway\Gateway.csproj", "{87AF5544-8613-4AF3-A955-4420E365C6E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sensor", "Sensor\Sensor.csproj", "{80E8EB9D-8092-45FC-A709-F312409AE697}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D716540C-0F5D-4F33-A57D-A9FD5E1D512B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D716540C-0F5D-4F33-A57D-A9FD5E1D512B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D716540C-0F5D-4F33-A57D-A9FD5E1D512B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D716540C-0F5D-4F33-A57D-A9FD5E1D512B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87AF5544-8613-4AF3-A955-4420E365C6E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87AF5544-8613-4AF3-A955-4420E365C6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87AF5544-8613-4AF3-A955-4420E365C6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87AF5544-8613-4AF3-A955-4420E365C6E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E8EB9D-8092-45FC-A709-F312409AE697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E8EB9D-8092-45FC-A709-F312409AE697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E8EB9D-8092-45FC-A709-F312409AE697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E8EB9D-8092-45FC-A709-F312409AE697}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4D31D2D3-D26B-4180-9794-777940F49E05}
+	EndGlobalSection
+EndGlobal
