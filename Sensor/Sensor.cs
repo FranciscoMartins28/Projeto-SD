@@ -32,21 +32,34 @@ namespace TP1
         static void Main(string[] args)
         {
             string ipGateway = args.Length > 0 ? args[0] : "127.0.0.1";
-            _sensorId = args.Length > 1 ? args[1] : "S101";
 
-            Console.WriteLine($"=== SENSOR {_sensorId} – One Health ===");
+            Console.WriteLine("=== SENSOR – One Health ===");
 
+            if (args.Length > 1)
+            {
+                _sensorId = args[1];
+            }
+            else
+            {
+                Console.Write("Introduza o ID deste Sensor (ex: S101, S102): ");
+                _sensorId = Console.ReadLine()?.Trim().ToUpper();
+
+
+                if (string.IsNullOrEmpty(_sensorId))
+                {
+                    _sensorId = "S101";
+                }
+            }
+
+            Console.WriteLine($"\n[INFO] A iniciar Sensor {_sensorId}...");
 
             _tiposDados = EscolherTiposDados();
 
-
             if (!LigarAoGateway(ipGateway)) return;
-
 
             Thread hbThread = new Thread(EnviarHeartbeats);
             hbThread.IsBackground = true;
             hbThread.Start();
-
 
             MenuPrincipal();
         }
