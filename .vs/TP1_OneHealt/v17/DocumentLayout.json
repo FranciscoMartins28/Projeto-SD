@@ -3,8 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{80E8EB9D-8092-45FC-A709-F312409AE697}|Sensor\\Sensor.csproj|c:\\users\\francisco\\source\\repos\\projeto-sd\\sensor\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E8EB9D-8092-45FC-A709-F312409AE697}|Sensor\\Sensor.csproj|solutionrelative:sensor\\sensor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80E8EB9D-8092-45FC-A709-F312409AE697}|Sensor\\Sensor.csproj|c:\\users\\francisco\\source\\repos\\projeto-sd\\sensor\\protocolo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{80E8EB9D-8092-45FC-A709-F312409AE697}|Sensor\\Sensor.csproj|solutionrelative:sensor\\protocolo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{87AF5544-8613-4AF3-A955-4420E365C6E0}|Gateway\\Gateway.csproj|c:\\users\\francisco\\source\\repos\\projeto-sd\\gateway\\gateway.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{87AF5544-8613-4AF3-A955-4420E365C6E0}|Gateway\\Gateway.csproj|solutionrelative:gateway\\gateway.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D716540C-0F5D-4F33-A57D-A9FD5E1D512B}|Servidor\\Servidor.csproj|c:\\users\\francisco\\source\\repos\\projeto-sd\\servidor\\servidor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D716540C-0F5D-4F33-A57D-A9FD5E1D512B}|Servidor\\Servidor.csproj|solutionrelative:servidor\\servidor.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87AF5544-8613-4AF3-A955-4420E365C6E0}|Gateway\\Gateway.csproj|c:\\users\\francisco\\source\\repos\\projeto-sd\\gateway\\protocolo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{87AF5544-8613-4AF3-A955-4420E365C6E0}|Gateway\\Gateway.csproj|solutionrelative:gateway\\protocolo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{80E8EB9D-8092-45FC-A709-F312409AE697}|Sensor\\Sensor.csproj|c:\\users\\francisco\\source\\repos\\projeto-sd\\sensor\\sensor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{80E8EB9D-8092-45FC-A709-F312409AE697}|Sensor\\Sensor.csproj|solutionrelative:sensor\\sensor.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{87AF5544-8613-4AF3-A955-4420E365C6E0}|Gateway\\Gateway.csproj|c:\\users\\francisco\\source\\repos\\projeto-sd\\gateway\\dados\\sensores.csv||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{87AF5544-8613-4AF3-A955-4420E365C6E0}|Gateway\\Gateway.csproj|solutionrelative:gateway\\dados\\sensores.csv||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 263,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 12,
           "Children": [
             {
               "$type": "Bookmark",
@@ -41,17 +65,93 @@
               "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Protocolo.cs",
+              "DocumentMoniker": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Sensor\\Protocolo.cs",
+              "RelativeDocumentMoniker": "Sensor\\Protocolo.cs",
+              "ToolTip": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Sensor\\Protocolo.cs",
+              "RelativeToolTip": "Sensor\\Protocolo.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-16T13:38:18.62Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Servidor.cs",
+              "DocumentMoniker": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Servidor\\Servidor.cs",
+              "RelativeDocumentMoniker": "Servidor\\Servidor.cs",
+              "ToolTip": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Servidor\\Servidor.cs",
+              "RelativeToolTip": "Servidor\\Servidor.cs",
+              "ViewState": "AgIAAIUAAAAAAAAAAAAiwJ8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T15:32:44.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Protocolo.cs",
+              "DocumentMoniker": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Gateway\\Protocolo.cs",
+              "RelativeDocumentMoniker": "Gateway\\Protocolo.cs",
+              "ToolTip": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Gateway\\Protocolo.cs",
+              "RelativeToolTip": "Gateway\\Protocolo.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAmwGsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T15:32:16.72Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Sensor.csproj",
+              "DocumentMoniker": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Sensor\\Sensor.csproj",
+              "RelativeDocumentMoniker": "Sensor\\Sensor.csproj",
+              "ToolTip": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Sensor\\Sensor.csproj",
+              "RelativeToolTip": "Sensor\\Sensor.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-04-15T15:32:16.126Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "sensores.csv",
+              "DocumentMoniker": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Gateway\\dados\\sensores.csv",
+              "RelativeDocumentMoniker": "Gateway\\dados\\sensores.csv",
+              "ToolTip": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Gateway\\dados\\sensores.csv",
+              "RelativeToolTip": "Gateway\\dados\\sensores.csv",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.002120|",
+              "WhenOpened": "2026-04-15T15:23:59.286Z"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Sensor.cs",
+              "DocumentMoniker": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Sensor\\Sensor.cs",
+              "RelativeDocumentMoniker": "Sensor\\Sensor.cs",
+              "ToolTip": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Sensor\\Sensor.cs",
+              "RelativeToolTip": "Sensor\\Sensor.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAmwEAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-15T15:23:52.84Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Gateway.cs",
               "DocumentMoniker": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Gateway\\Gateway.cs",
               "RelativeDocumentMoniker": "Gateway\\Gateway.cs",
               "ToolTip": "C:\\Users\\Francisco\\source\\repos\\Projeto-SD\\Gateway\\Gateway.cs",
               "RelativeToolTip": "Gateway\\Gateway.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAOYAAAAAAAAAAAAcwOoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-04-15T15:16:52.742Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-04-15T15:16:52.742Z"
             },
             {
               "$type": "Bookmark",
