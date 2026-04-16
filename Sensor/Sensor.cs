@@ -1,9 +1,4 @@
-// ============================================================
-// Sensor.cs  –  Recolha e envio de dados ambientais
-// TP1 Sistemas Distribuídos 2025/2026
-// Uso:  dotnet run [ip_gateway] [sensor_id]
-//       ex: dotnet run 127.0.0.1 S101
-// ============================================================
+
 using System;
 using System.Collections.Generic;
 using System.Net.Sockets;
@@ -14,21 +9,17 @@ namespace TP1
 {
     class Sensor
     {
-        // --------------------------------------------------------
-        // Configuração
-        // --------------------------------------------------------
-        private const int    PORTA_GATEWAY   = 8000;
-        private const int    INTERVALO_HB    = 10_000; // ms entre heartbeats
 
-        // Tipos de dados que este sensor pode enviar
+        private const int    PORTA_GATEWAY   = 8000;
+        private const int    INTERVALO_HB    = 10_000; 
+
+
         private static readonly string[] TIPOS_DADOS_DISPONIVEIS =
         {
             "TEMP", "HUM", "RUIDO", "PM2.5", "PM10", "AR", "LUZ"
         };
 
-        // --------------------------------------------------------
-        // Estado
-        // --------------------------------------------------------
+
         private static string        _sensorId;
         private static string        _zona;
         private static List<string>  _tiposDados;
@@ -37,9 +28,7 @@ namespace TP1
         private static bool          _ligado = false;
         private static readonly object _lockStream = new object();
 
-        // --------------------------------------------------------
-        // Ponto de entrada
-        // --------------------------------------------------------
+
         static void Main(string[] args)
         {
             string ipGateway = args.Length > 0 ? args[0] : "127.0.0.1";
@@ -47,24 +36,23 @@ namespace TP1
 
             Console.WriteLine($"=== SENSOR {_sensorId} – One Health ===");
 
-            // Configurar tipos de dados suportados pelo sensor
+
             _tiposDados = EscolherTiposDados();
 
-            // Ligar ao gateway
+
             if (!LigarAoGateway(ipGateway)) return;
 
-            // Thread de heartbeat periódico
+
             Thread hbThread = new Thread(EnviarHeartbeats);
             hbThread.IsBackground = true;
             hbThread.Start();
 
-            // Interface de texto com o utilizador
+
             MenuPrincipal();
         }
 
-        // --------------------------------------------------------
-        // Ligação ao Gateway
-        // --------------------------------------------------------
+
+
         private static bool LigarAoGateway(string ip)
         {
             try
@@ -74,7 +62,7 @@ namespace TP1
                 _escritor = new StreamWriter(stream, Encoding.UTF8) { AutoFlush = true };
                 _leitor   = new StreamReader(stream, Encoding.UTF8);
 
-                // Enviar CONNECT
+
                 _escritor.WriteLine(Protocolo.Connect(_sensorId, _tiposDados.ToArray()));
                 string resposta = _leitor.ReadLine();
                 string[] campos = Protocolo.Parse(resposta ?? "");
@@ -99,9 +87,7 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Heartbeat periódico (thread separada)
-        // --------------------------------------------------------
+
         private static void EnviarHeartbeats()
         {
             while (_ligado)
@@ -116,9 +102,7 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Menu interativo
-        // --------------------------------------------------------
+
         private static void MenuPrincipal()
         {
             while (_ligado)
@@ -142,12 +126,10 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Envio de medição
-        // --------------------------------------------------------
+
         private static void EnviarMedicao()
         {
-            // Mostrar tipos suportados
+
             Console.WriteLine("\nTipos de dados disponíveis:");
             for (int i = 0; i < _tiposDados.Count; i++)
                 Console.WriteLine($"  {i + 1}) {_tiposDados[i]}");
@@ -188,9 +170,7 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Pedido de stream de vídeo
-        // --------------------------------------------------------
+
         private static void EnviarVideo()
         {
             Console.Write("Zona do stream: ");
@@ -211,9 +191,7 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Heartbeat manual
-        // --------------------------------------------------------
+
         private static void HeartbeatManual()
         {
             lock (_lockStream)
@@ -227,9 +205,7 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Desligar
-        // --------------------------------------------------------
+
         private static void Desligar()
         {
             _ligado = false;
@@ -241,13 +217,11 @@ namespace TP1
                     string resposta = _leitor.ReadLine();
                     Console.WriteLine("[DISCONNECT] Sensor desligado correctamente.");
                 }
-                catch { /* ignorar erros no fecho */ }
+                catch {  }
             }
         }
 
-        // --------------------------------------------------------
-        // Configuração inicial dos tipos de dados suportados
-        // --------------------------------------------------------
+
         private static List<string> EscolherTiposDados()
         {
             Console.WriteLine("\nTipos de dados disponíveis:");

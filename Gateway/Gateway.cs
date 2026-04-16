@@ -1,8 +1,3 @@
-// ============================================================
-// Gateway.cs  –  Agregação e encaminhamento de dados
-// TP1 Sistemas Distribuídos 2025/2026
-// Porta sensores : 8000  |  Servidor : localhost:9000
-// ============================================================
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,34 +10,19 @@ namespace TP1
 {
     class Gateway
     {
-        // --------------------------------------------------------
-        // Configuração
-        // --------------------------------------------------------
         private const int    PORTA_SENSORES     = 8000;
         private const string IP_SERVIDOR        = "127.0.0.1";
         private const int    PORTA_SERVIDOR     = 9000;
         private const string GATEWAY_ID         = "GW01";
         private const string FICHEIRO_SENSORES  = "dados/sensores.csv";
         private const int    TIMEOUT_HEARTBEAT  = 30; // segundos
-
-        // --------------------------------------------------------
-        // Estado partilhado (acesso protegido por lock)
-        // --------------------------------------------------------
         private static readonly object _lockCSV = new object();
-
-        // sensorId → InfoSensor
         private static readonly Dictionary<string, InfoSensor> _sensores
             = new Dictionary<string, InfoSensor>();
-
-        // Ligação persistente ao servidor
         private static TcpClient    _clienteServidor;
         private static StreamWriter _escritorServidor;
         private static StreamReader _leitorServidor;
         private static readonly object _lockServidor = new object();
-
-        // --------------------------------------------------------
-        // Estrutura de informação de sensor
-        // --------------------------------------------------------
         private class InfoSensor
         {
             public string   Estado      { get; set; }
@@ -50,26 +30,18 @@ namespace TP1
             public List<string> TiposDados { get; set; }
             public DateTime UltimoSync  { get; set; }
         }
-
-        // --------------------------------------------------------
-        // Ponto de entrada
-        // --------------------------------------------------------
         static void Main(string[] args)
         {
             Console.WriteLine("=== GATEWAY TP1 – One Health ===");
 
-            // 1. Carregar configuração de sensores
             CarregarCSV();
 
-            // 2. Ligar ao servidor
             LigarAoServidor();
 
-            // 3. Thread de monitorização de heartbeats
             Thread monitorThread = new Thread(MonitorizarHeartbeats);
             monitorThread.IsBackground = true;
             monitorThread.Start();
 
-            // 4. Escutar sensores
             Console.WriteLine($"A escutar sensores na porta {PORTA_SENSORES}...\n");
             TcpListener listener = new TcpListener(IPAddress.Any, PORTA_SENSORES);
             listener.Start();
@@ -83,9 +55,6 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Ligação ao servidor (com handshake GATEWAY_CONNECT)
-        // --------------------------------------------------------
         private static void LigarAoServidor()
         {
             try
@@ -110,9 +79,6 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Tratamento de sensor (thread por sensor – fase 4)
-        // --------------------------------------------------------
         private static void TratarSensor(TcpClient cliente)
         {
             string sensorId = "?";
@@ -129,13 +95,19 @@ namespace TP1
                     {
                         if (string.IsNullOrWhiteSpace(linha)) continue;
                         string[] campos = Protocolo.Parse(linha);
+                       
+                        if (campos.Length == 0)
+                        {
+                            Console.WriteLine("[ERRO] Mensagem inválida");
+                            continue;
+                        }
 
                         switch (campos[0])
                         {
-                            // ---- CONNECT ----
+
                             case Msg.CONNECT:
                             {
-                                // CONNECT|sensorId|tipoDado1,tipoDado2,...
+
                                 sensorId = campos.Length > 1 ? campos[1] : "?";
                                 InfoSensor info = ValidarSensor(sensorId);
 
@@ -164,18 +136,19 @@ namespace TP1
                                 break;
                             }
 
-                            // ---- HEARTBEAT ----
+
                             case Msg.HEARTBEAT:
                             {
-                                AtualizarSync(sensorId);
-                                Console.WriteLine($"[HB] {sensorId} @ {(campos.Length > 2 ? campos[2] : "?")}");
-                                break;
-                            }
+                                    AtualizarSync(sensorId);
+                                    Console.WriteLine($"[HB] {sensorId} @ {(campos.Length > 2 ? campos[2] : "?")}");
+                                    escritor.WriteLine(Protocolo.AckHeartbeat(true));
+                                    break;
+                                }
 
-                            // ---- DATA ----
+
                             case Msg.DATA:
                             {
-                                // DATA|sensorId|zona|tipoDado|valor|timestamp
+
                                 if (campos.Length < 6)
                                 {
                                     escritor.WriteLine(Protocolo.AckData(false, "Formato invalido"));
@@ -199,7 +172,7 @@ namespace TP1
                                     break;
                                 }
 
-                                // Encaminhar para servidor
+
                                 bool ok = EnviarParaServidor(
                                     Protocolo.Store(sid, zona, tipoDado, valor, timestamp));
 
@@ -209,21 +182,21 @@ namespace TP1
                                 break;
                             }
 
-                            // ---- VIDEO_STREAM ----
+
                             case Msg.VIDEO_STREAM:
                             {
-                                // Processamento edge simulado
+
                                 Console.WriteLine($"[VIDEO] Stream de {sensorId} recebida (processamento edge simulado).");
                                 escritor.WriteLine(Protocolo.AckVideo(true));
                                 break;
                             }
 
-                            // ---- DISCONNECT ----
+
                             case Msg.DISCONNECT:
                             {
                                 Console.WriteLine($"[DISCONNECT] {sensorId} desligou-se.");
                                 escritor.WriteLine(Protocolo.AckDisconnect());
-                                return; // Fechar ligação
+                                return; 
                             }
 
                             default:
@@ -239,9 +212,7 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Envio de mensagem ao servidor (protegido por lock – fase 4)
-        // --------------------------------------------------------
+
         private static bool EnviarParaServidor(string mensagem)
         {
             lock (_lockServidor)
@@ -261,9 +232,7 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Carregar/guardar CSV de sensores (protegido por lock)
-        // --------------------------------------------------------
+
         private static void CarregarCSV()
         {
             lock (_lockCSV)
@@ -276,14 +245,14 @@ namespace TP1
                 {
                     if (linha.StartsWith("sensor_id") || string.IsNullOrWhiteSpace(linha))
                         continue;
-                    // sensor_id:estado:zona:[tipos_dados]:last_sync
+
                     string[] p = linha.Split(':');
                     if (p.Length < 5) continue;
 
                     string sid    = p[0];
                     string estado = p[1];
                     string zona   = p[2];
-                    // p[3] = "[TEMP,HUM]"
+
                     string tiposRaw = p[3].Trim('[', ']');
                     List<string> tipos = new List<string>(
                         tiposRaw.Split(new[]{','}, StringSplitOptions.RemoveEmptyEntries));
@@ -319,9 +288,7 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Validação e atualização de estado
-        // --------------------------------------------------------
+
         private static InfoSensor ValidarSensor(string sid)
         {
             lock (_lockCSV)
@@ -338,19 +305,20 @@ namespace TP1
                 if (_sensores.TryGetValue(sid, out InfoSensor info))
                 {
                     info.UltimoSync = DateTime.Now;
-                    GuardarCSV();
+                    if ((DateTime.Now - info.UltimoSync).TotalSeconds > 5)
+                    {
+                        GuardarCSV();
+                    }
                 }
             }
         }
 
-        // --------------------------------------------------------
-        // Monitorização de heartbeats (fase 3/4)
-        // --------------------------------------------------------
+
         private static void MonitorizarHeartbeats()
         {
             while (true)
             {
-                Thread.Sleep(10_000); // verificar a cada 10 segundos
+                Thread.Sleep(10_000); 
                 lock (_lockCSV)
                 {
                     foreach (var kv in _sensores)

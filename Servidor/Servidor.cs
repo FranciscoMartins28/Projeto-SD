@@ -1,8 +1,4 @@
-// ============================================================
-// Servidor.cs  –  Armazenamento e processamento de dados
-// TP1 Sistemas Distribuídos 2025/2026
-// Porta por omissão: 9000
-// ============================================================
+
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -15,42 +11,37 @@ namespace TP1
 {
     class Servidor
     {
-        // --------------------------------------------------------
-        // Configuração
-        // --------------------------------------------------------
+
         private const int PORTA = 9000;
         private const string DIR_DADOS = "dados_servidor";
 
-        // Mutex por ficheiro para garantir escrita exclusiva (fase 4)
+
         private static readonly Dictionary<string, Mutex> _mutexFicheiros
             = new Dictionary<string, Mutex>();
         private static readonly object _lockMutexDict = new object();
 
-        // --------------------------------------------------------
-        // Ponto de entrada
-        // --------------------------------------------------------
+
         static void Main(string[] args)
         {
             Directory.CreateDirectory(DIR_DADOS);
             Console.WriteLine("=== SERVIDOR TP1 – One Health ===");
             Console.WriteLine($"A escutar na porta {PORTA}...\n");
 
+
+
+
             TcpListener listener = new TcpListener(IPAddress.Any, PORTA);
             listener.Start();
 
             while (true)
             {
-                TcpClient cliente = listener.AcceptTcpClient();
-                // Cada gateway atendido numa thread separada (fase 4)
-                Thread t = new Thread(() => TratarGateway(cliente));
-                t.IsBackground = true;
-                t.Start();
+                TcpClient client = listener.AcceptTcpClient();
+                new Thread(() => Handle(client)).Start();
+
             }
         }
 
-        // --------------------------------------------------------
-        // Tratamento de um gateway (corre numa thread própria)
-        // --------------------------------------------------------
+
         private static void TratarGateway(TcpClient cliente)
         {
             string gatewayId = "desconhecido";
@@ -72,16 +63,16 @@ namespace TP1
 
                         switch (tipo)
                         {
-                            // ---- Registo do gateway ----
+
                             case Msg.GATEWAY_CONNECT:
                                 gatewayId = campos.Length > 1 ? campos[1] : "?";
                                 Console.WriteLine($"[GATEWAY] '{gatewayId}' ligou-se.");
                                 escritor.WriteLine(Protocolo.AckGateway(true));
                                 break;
 
-                            // ---- Receção e armazenamento de medição ----
+
                             case Msg.STORE:
-                                // STORE|sensorId|zona|tipoDado|valor|timestamp
+
                                 if (campos.Length < 6)
                                 {
                                     escritor.WriteLine(Protocolo.AckStore(false, "Formato invalido"));
@@ -115,13 +106,11 @@ namespace TP1
             }
         }
 
-        // --------------------------------------------------------
-        // Escrita atómica no ficheiro (mutex por ficheiro – fase 4)
-        // --------------------------------------------------------
+
         private static void ArmazenarMedicao(string zona, string tipoDado,
                                              string sensorId, string valor, string timestamp)
         {
-            // Um ficheiro por tipo de dado
+
             string nomeFicheiro = Path.Combine(DIR_DADOS, $"{tipoDado}.csv");
 
             Mutex mutex = ObterMutex(nomeFicheiro);
@@ -142,7 +131,7 @@ namespace TP1
             }
         }
 
-        // Obtém (ou cria) o mutex associado a um ficheiro
+
         private static Mutex ObterMutex(string caminho)
         {
             lock (_lockMutexDict)
