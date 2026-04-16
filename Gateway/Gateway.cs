@@ -137,13 +137,7 @@ namespace TP1
                             }
 
 
-                            case Msg.HEARTBEAT:
-                            {
-                                    AtualizarSync(sensorId);
-                                    Console.WriteLine($"[HB] {sensorId} @ {(campos.Length > 2 ? campos[2] : "?")}");
-                                    escritor.WriteLine(Protocolo.AckHeartbeat(true));
-                                    break;
-                                }
+                           
 
 
                             case Msg.DATA:

@@ -20,3 +20,11 @@ C:\Users\Francisco\source\repos\Projeto-SD\Gateway\obj\Debug\net9.0\Gateway.sour
 C:\Users\Francisco\source\repos\Projeto-SD\Gateway\obj\Debug\net9.0\Gateway.dll
 C:\Users\Francisco\source\repos\Projeto-SD\Gateway\obj\Debug\net9.0\refint\Gateway.dll
 C:\Users\Francisco\source\repos\Projeto-SD\Gateway\obj\Debug\net9.0\Gateway.pdb
+C:\Users\Francisco\source\repos\Projeto-SD\Gateway\bin\Debug\net9.0\Gateway.exe
+C:\Users\Francisco\source\repos\Projeto-SD\Gateway\bin\Debug\net9.0\dados\sensores.csv
+C:\Users\Francisco\source\repos\Projeto-SD\Gateway\bin\Debug\net9.0\Gateway.deps.json
+C:\Users\Francisco\source\repos\Projeto-SD\Gateway\bin\Debug\net9.0\Gateway.runtimeconfig.json
+C:\Users\Francisco\source\repos\Projeto-SD\Gateway\bin\Debug\net9.0\Gateway.dll
+C:\Users\Francisco\source\repos\Projeto-SD\Gateway\bin\Debug\net9.0\Gateway.pdb
+C:\Users\Francisco\source\repos\Projeto-SD\Gateway\obj\Debug\net9.0\Gateway.genruntimeconfig.cache
+C:\Users\Francisco\source\repos\Projeto-SD\Gateway\obj\Debug\net9.0\ref\Gateway.dll

@@ -35,3 +35,10 @@ C:\Users\Francisco\source\repos\Projeto-SD\Servidor\obj\Debug\net9.0\Servidor.so
 C:\Users\Francisco\source\repos\Projeto-SD\Servidor\obj\Debug\net9.0\Servidor.dll
 C:\Users\Francisco\source\repos\Projeto-SD\Servidor\obj\Debug\net9.0\refint\Servidor.dll
 C:\Users\Francisco\source\repos\Projeto-SD\Servidor\obj\Debug\net9.0\Servidor.pdb
+C:\Users\Francisco\source\repos\Projeto-SD\Servidor\bin\Debug\net9.0\Servidor.exe
+C:\Users\Francisco\source\repos\Projeto-SD\Servidor\bin\Debug\net9.0\Servidor.deps.json
+C:\Users\Francisco\source\repos\Projeto-SD\Servidor\bin\Debug\net9.0\Servidor.runtimeconfig.json
+C:\Users\Francisco\source\repos\Projeto-SD\Servidor\bin\Debug\net9.0\Servidor.dll
+C:\Users\Francisco\source\repos\Projeto-SD\Servidor\bin\Debug\net9.0\Servidor.pdb
+C:\Users\Francisco\source\repos\Projeto-SD\Servidor\obj\Debug\net9.0\Servidor.genruntimeconfig.cache
+C:\Users\Francisco\source\repos\Projeto-SD\Servidor\obj\Debug\net9.0\ref\Servidor.dll
