@@ -192,6 +192,12 @@ namespace TP1
                                 escritor.WriteLine(Protocolo.AckDisconnect());
                                 return; 
                             }
+                            case Msg.HEARTBEAT:
+                                {
+                                    AtualizarSync(sensorId);
+                                    Console.WriteLine($"[HB] {sensorId} @ {(campos.Length > 2 ? campos[2] : "?")}");
+                                    break;
+                                }
 
                             default:
                                 Console.WriteLine($"[AVISO] Mensagem desconhecida: {linha}");
@@ -299,13 +305,11 @@ namespace TP1
                 if (_sensores.TryGetValue(sid, out InfoSensor info))
                 {
                     info.UltimoSync = DateTime.Now;
-                    if ((DateTime.Now - info.UltimoSync).TotalSeconds > 5)
-                    {
-                        GuardarCSV();
-                    }
+                    GuardarCSV(); // guardar sempre
                 }
             }
         }
+            
 
 
         private static void MonitorizarHeartbeats()

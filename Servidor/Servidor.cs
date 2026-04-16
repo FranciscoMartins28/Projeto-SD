@@ -36,7 +36,9 @@ namespace TP1
             while (true)
             {
                 TcpClient client = listener.AcceptTcpClient();
-                new Thread(() => TratarGateway(client)).Start();
+                Thread t = new Thread(() => TratarGateway(client));
+                t.IsBackground = true;
+                t.Start();
 
             }
         }
