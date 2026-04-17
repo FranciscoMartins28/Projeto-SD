@@ -6,31 +6,31 @@ namespace TP1
 
     public static class Msg
     {
- 
-        public const string CONNECT         = "CONNECT";
-        public const string HEARTBEAT       = "HEARTBEAT";
-        public const string DATA            = "DATA";
-        public const string VIDEO_STREAM    = "VIDEO_STREAM";
-        public const string DISCONNECT      = "DISCONNECT";
+
+        public const string CONNECT = "CONNECT";
+        public const string HEARTBEAT = "HEARTBEAT";
+        public const string DATA = "DATA";
+        public const string VIDEO_STREAM = "VIDEO_STREAM";
+        public const string DISCONNECT = "DISCONNECT";
 
 
-        public const string ACK_CONNECT     = "ACK_CONNECT";
-        public const string ACK_DATA        = "ACK_DATA";
-        public const string ACK_VIDEO       = "ACK_VIDEO";
-        public const string ACK_DISCONNECT  = "ACK_DISCONNECT";
+        public const string ACK_CONNECT = "ACK_CONNECT";
+        public const string ACK_DATA = "ACK_DATA";
+        public const string ACK_VIDEO = "ACK_VIDEO";
+        public const string ACK_DISCONNECT = "ACK_DISCONNECT";
 
 
         public const string GATEWAY_CONNECT = "GATEWAY_CONNECT";
-        public const string STORE           = "STORE";
+        public const string STORE = "STORE";
 
 
-        public const string ACK_GATEWAY     = "ACK_GATEWAY";
-        public const string ACK_STORE       = "ACK_STORE";
+        public const string ACK_GATEWAY = "ACK_GATEWAY";
+        public const string ACK_STORE = "ACK_STORE";
 
 
-        public const string OK              = "OK";
-        public const string ERR             = "ERR";
-        public const string REJECT          = "REJECT";
+        public const string OK = "OK";
+        public const string ERR = "ERR";
+        public const string REJECT = "REJECT";
     }
 
 
@@ -46,6 +46,10 @@ namespace TP1
         public static string[] Parse(string mensagem)
             => mensagem.Split(SEP);
 
+
+        // MELHORIA: validação de campos
+        public static bool ValidaCampos(string[] campos, int minCampos)
+            => campos != null && campos.Length >= minCampos;
 
 
         public static string Connect(string sensorId, string[] tiposDados)

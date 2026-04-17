@@ -47,6 +47,9 @@ namespace TP1
         public static string[] Parse(string mensagem)
             => mensagem.Split(SEP);
 
+         // MELHORIA: validação de campos
+        public static bool ValidaCampos(string[] campos, int minCampos)
+            => campos != null && campos.Length >= minCampos;
 
 
         public static string Connect(string sensorId, string[] tiposDados)
