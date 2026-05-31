@@ -1,0 +1,57 @@
+// =====================================================================
+//  preprocessing.proto
+//  -------------------------------------------------------------------
+//  Contrato gRPC do serviço de Pré-processamento.
+//  Invocado pelo Gateway antes de encaminhar os dados para o Servidor.
+//  Responsável por: uniformização de unidades, parsing de
+//  JSON / XML / CSV e validação de gama de valores.
+// =====================================================================
+syntax = "proto3";
+
+option csharp_namespace = "OneHealth.PreProcessing";
+
+package onehealth.preprocessing;
+
+// ---------------------------------------------------------------------
+// Mensagens de entrada / saída
+// ---------------------------------------------------------------------
+message RawMeasurement {
+    string sensor_id   = 1;   // Ex: S101
+    string zona        = 2;   // Ex: ZONA_CENTRO
+    string tipo_dado   = 3;   // TEMP, HUM, PM2.5, ...
+    string payload     = 4;   // valor em bruto (texto, JSON, XML ou CSV)
+    string formato     = 5;   // "RAW", "JSON", "XML", "CSV"
+    string unidade     = 6;   // "C", "F", "K", "%", "ug/m3", ...
+    string timestamp   = 7;   // ISO-8601
+}
+
+message NormalizedMeasurement {
+    string  sensor_id     = 1;
+    string  zona          = 2;
+    string  tipo_dado     = 3;
+    double  valor         = 4;  // já convertido para SI
+    string  unidade_si    = 5;  // unidade canónica (C, %, ug/m3)
+    string  timestamp     = 6;
+    bool    valido        = 7;  // valor dentro da gama esperada
+    string  observacoes   = 8;  // ex: "convertido de F para C"
+}
+
+// ---------------------------------------------------------------------
+// Serviço
+// ---------------------------------------------------------------------
+service PreProcessingService {
+    // Normaliza uma única medição
+    rpc Normalize          (RawMeasurement) returns (NormalizedMeasurement);
+
+    // Normaliza um lote (mais eficiente para chamadas em rajada)
+    rpc NormalizeBatch     (BatchRequest)   returns (BatchResponse);
+
+    // Healthcheck
+    rpc Ping               (PingRequest)    returns (PingResponse);
+}
+
+message BatchRequest  { repeated RawMeasurement medicoes = 1; }
+message BatchResponse { repeated NormalizedMeasurement medicoes = 1; }
+
+message PingRequest   { string origem = 1; }
+message PingResponse  { string mensagem = 1; string timestamp = 2; }
