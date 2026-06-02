@@ -7,7 +7,7 @@ echo ========================================
 echo.
 
 REM === 1) RabbitMQ ===
-echo [1/7] A arrancar RabbitMQ (Docker)...
+echo [1/8] A arrancar RabbitMQ (Docker)...
 docker start rabbit >nul 2>&1
 if errorlevel 1 (
     echo      Container 'rabbit' nao existe. A criar...
@@ -17,32 +17,36 @@ echo      [OK] RabbitMQ a arrancar.
 timeout /t 5 /nobreak >nul
 
 REM === 2) Servico de Pre-processamento (Python) ===
-echo [2/7] A arrancar Pre-processamento...
+echo [2/8] A arrancar Pre-processamento...
 start "PreProcessing" cmd /k "cd /d %~dp0PreProcessingService && py preprocessing_server.py"
 timeout /t 3 /nobreak >nul
 
 REM === 3) Servico de Analise (Python) ===
-echo [3/7] A arrancar Analise...
+echo [3/8] A arrancar Analise...
 start "Analysis" cmd /k "cd /d %~dp0AnalysisService && py analysis_server.py"
 timeout /t 3 /nobreak >nul
 
 REM === 4) Servidor (C#) ===
-echo [4/7] A arrancar Servidor...
+echo [4/8] A arrancar Servidor...
 start "Servidor" cmd /k "cd /d %~dp0Servidor && dotnet run"
 timeout /t 8 /nobreak >nul
 
 REM === 5) Gateway (C#) ===
-echo [5/7] A arrancar Gateway...
+echo [5/8] A arrancar Gateway...
 start "Gateway" cmd /k "cd /d %~dp0Gateway && dotnet run -- GW01 localhost 127.0.0.1 9000 localhost 50051 # #"
 timeout /t 5 /nobreak >nul
 
 REM === 6) Sensor (C#) ===
-echo [6/7] A arrancar Sensor S101...
+echo [6/8] A arrancar Sensor S101...
 start "Sensor S101" cmd /k "cd /d %~dp0Sensor && dotnet run -- S101 ZONA_CENTRO auto localhost 3000"
 timeout /t 3 /nobreak >nul
 
+echo       A arrancar Sensor S102...
+start "Sensor S102" cmd /k "cd /d %~dp0Sensor && dotnet run -- S102 ZONA_ESCOLAR auto localhost 4000"
+timeout /t 3 /nobreak >nul
+
 REM === 7) Interface Web (Python/Flask) ===
-echo [7/7] A arrancar Interface Web...
+echo [7/8] A arrancar Interface Web...
 start "WebUI" cmd /k "cd /d %~dp0Interface && py web_interface.py"
 timeout /t 5 /nobreak >nul
 
@@ -52,9 +56,13 @@ echo A abrir o Dashboard no browser...
 start "" "http://localhost:8080"
 
 echo.
-echo ========================================REM === 8) Interface CLI ===
+REM === 8) Interface CLI ===
 echo [8/8] A arrancar Interface CLI...
 start "CLI" cmd /k "cd /d %~dp0Interface && dotnet run"
+timeout /t 3 /nobreak >nul
+
+echo.
+echo ========================================
 echo  Tudo iniciado!
 echo.
 echo   Dashboard Web : http://localhost:8080
